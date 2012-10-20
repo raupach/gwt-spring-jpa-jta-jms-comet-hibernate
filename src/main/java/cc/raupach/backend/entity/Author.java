@@ -1,4 +1,4 @@
-package cc.raupach.starterdb.entity;
+package cc.raupach.backend.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
 
-import cc.raupach.starterdb.util.AbstractBusinessObject;
+import cc.raupach.backend.util.AbstractBusinessObject;
 
 @Entity
 public class Author extends AbstractBusinessObject

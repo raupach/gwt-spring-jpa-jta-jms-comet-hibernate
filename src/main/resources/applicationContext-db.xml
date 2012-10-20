@@ -41,7 +41,7 @@
         <property name="driverProperties">
             <props>
                 <prop key="user">sa</prop>
-                <prop key="url">jdbc:hsqldb:mem:starterdb</prop>
+                <prop key="url">jdbc:hsqldb:mem:backend_db</prop>
             </props>
         </property>	    
 	</bean>	

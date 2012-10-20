@@ -1,4 +1,4 @@
-package cc.raupach.starterdb.dao;
+package cc.raupach.backend.dao;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Component;
 
-import cc.raupach.starterdb.entity.Book;
-import cc.raupach.starterdb.util.GenericJpaDAOImpl;
+import cc.raupach.backend.entity.Book;
+import cc.raupach.backend.util.GenericJpaDAOImpl;
 
 @Component
 public class BookDAOImpl extends GenericJpaDAOImpl<Book, Integer> implements BookDAO

@@ -1,9 +1,9 @@
-package cc.raupach.starterdb.dao;
+package cc.raupach.backend.dao;
 
 import java.util.List;
 
-import cc.raupach.starterdb.entity.Book;
-import cc.raupach.starterdb.util.GenericJpaDAO;
+import cc.raupach.backend.entity.Book;
+import cc.raupach.backend.util.GenericJpaDAO;
 
 
 public interface BookDAO extends GenericJpaDAO<Book, Integer>

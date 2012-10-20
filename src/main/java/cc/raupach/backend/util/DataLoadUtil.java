@@ -1,4 +1,4 @@
-package cc.raupach.starterdb.util;
+package cc.raupach.backend.util;
 
 import java.util.GregorianCalendar;
 
@@ -11,8 +11,8 @@ import javax.persistence.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cc.raupach.starterdb.entity.Author;
-import cc.raupach.starterdb.entity.Book;
+import cc.raupach.backend.entity.Author;
+import cc.raupach.backend.entity.Book;
 
 /**
  * Use this class to reset the database state for the test entities.

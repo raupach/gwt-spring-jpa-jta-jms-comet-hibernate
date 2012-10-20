@@ -1,4 +1,4 @@
-package cc.raupach.starterdb.util;
+package cc.raupach.backend.util;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;

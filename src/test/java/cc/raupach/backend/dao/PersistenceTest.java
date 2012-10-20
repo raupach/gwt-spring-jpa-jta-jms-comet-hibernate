@@ -1,4 +1,4 @@
-package com.force.samples.test;
+package cc.raupach.backend.dao;
 
 import java.util.List;
 
@@ -12,14 +12,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import cc.raupach.starterdb.dao.AuthorDAO;
-import cc.raupach.starterdb.dao.BookDAO;
-import cc.raupach.starterdb.entity.Author;
-import cc.raupach.starterdb.entity.Book;
+import cc.raupach.backend.dao.AuthorDAO;
+import cc.raupach.backend.dao.BookDAO;
+import cc.raupach.backend.entity.Author;
+import cc.raupach.backend.entity.Book;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "file:src/main/resources/applicationContext-core.xml" })
+@ContextConfiguration(locations = { "classpath:applicationContext-core.xml" })
 @Transactional
 @TransactionConfiguration(defaultRollback = false)
 public class PersistenceTest

@@ -26,6 +26,6 @@
 	<context:annotation-config />
 
 	<!-- Scans for application @Components to deploy -->
-	<context:component-scan base-package="cc.raupach.starterdb" />
+	<context:component-scan base-package="cc.raupach.backend" />
 	
 </beans>

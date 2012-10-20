@@ -1,4 +1,4 @@
-package cc.raupach.starterdb.entity;
+package cc.raupach.backend.entity;
 
 import java.util.Date;
 
@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import cc.raupach.starterdb.util.AbstractBusinessObject;
+import cc.raupach.backend.util.AbstractBusinessObject;
 
 @Entity
 public class Book extends AbstractBusinessObject

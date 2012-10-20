@@ -1,4 +1,4 @@
-package cc.raupach.starterdb.jms;
+package cc.raupach.backend.jms;
 
 import javax.jms.Message;
 import javax.jms.MessageListener;
