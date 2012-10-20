@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/security 
+		http://www.springframework.org/schema/security/spring-security-3.1.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+
+    <!-- Datasource for MySql db
+	<bean id="dataSource" class="bitronix.tm.resource.jdbc.PoolingDataSource" init-method="init" destroy-method="close">
+		<property name="uniqueName" value="mysql_jbm" />
+        <property name="maxPoolSize" value="5" />
+        <property name="className" value="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"/>
+        <property name="allowLocalTransactions" value="true" />
+        <property name="driverProperties">
+            <props>
+                <prop key="databaseName">starterdb</prop>
+                <prop key="user">starterdb</prop>
+                <prop key="password">starterdb</prop>
+                <prop key="URL">jdbc:mysql://localhost:3306/starterdb?useUnicode=true&amp;characterEncoding=UTF-8</prop>
+            </props>
+        </property>	    
+	</bean>
+	-->
+	
+	<bean id="dataSource" class="bitronix.tm.resource.jdbc.PoolingDataSource" init-method="init" destroy-method="close">
+		<property name="uniqueName" value="hsql_jbm" />
+        <property name="maxPoolSize" value="5" />
+        <property name="minPoolSize" value="1" />
+        <property name="className" value="org.hsqldb.jdbc.pool.JDBCXADataSource"/>
+        <property name="allowLocalTransactions" value="true" />
+        <property name="driverProperties">
+            <props>
+                <prop key="user">sa</prop>
+                <prop key="url">jdbc:hsqldb:mem:starterdb</prop>
+            </props>
+        </property>	    
+	</bean>	
+	
+	
+	<!--  Bitronix Transaction Manager embedded configuration -->
+	<bean id="btmConfig" factory-method="getConfiguration" class="bitronix.tm.TransactionManagerServices">
+    	<property name="serverId" value="spring-btm" />
+    	<property name="logPart1Filename" value="temp/btm1.tlog" />
+ 		<property name="logPart2Filename" value="temp/btm2.tlog" />
+ 		<property name="warnAboutZeroResourceTransaction" value="false" />
+ 		<property name="gracefulShutdownInterval" value="0" />
+	</bean>
+ 
+	<!-- create BTM transaction manager -->
+	<bean id="BitronixTransactionManager" factory-method="getTransactionManager" class="bitronix.tm.TransactionManagerServices" depends-on="btmConfig" destroy-method="shutdown" />
+	
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml" />
+		<property name="persistenceUnitName" value="JPAService" />
+		<property name="dataSource" ref="dataSource" />
+
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+			    
+			    <!-- MySQL
+				<property name="databasePlatform" value="org.hibernate.dialect.MySQL5Dialect" /> -->
+				
+				<!-- HSQLDB -->
+				<property name="databasePlatform" value="org.hibernate.dialect.HSQLDialect" />
+				<property name="showSql" value="true" />
+				<property name="generateDdl" value="true" />
+			</bean>
+		</property>
+		<property name="jpaProperties">
+			<!-- set extra properties here, e.g. for Hibernate: -->
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>				
+			</props>
+		</property>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
+	 	<property name="transactionManager" ref="BitronixTransactionManager" />
+    	<property name="userTransaction" ref="BitronixTransactionManager" />
+	</bean>
+
+	
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+	
+</beans>
