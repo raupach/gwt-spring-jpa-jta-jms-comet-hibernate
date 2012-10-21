@@ -18,10 +18,5 @@
 
 	<!-- Import additional context resources -->
 	<import resource="classpath:applicationContext-core.xml" />
-	
-	<!--
-	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
-    -->
     
 </beans>
