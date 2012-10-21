@@ -32,6 +32,7 @@
 	</bean>
 	-->
 	
+	<!-- Datasource for HSQLDB
 	<bean id="dataSource" class="bitronix.tm.resource.jdbc.PoolingDataSource" init-method="init" destroy-method="close">
 		<property name="uniqueName" value="hsql_jbm" />
         <property name="maxPoolSize" value="5" />
@@ -45,7 +46,23 @@
             </props>
         </property>	    
 	</bean>	
-	
+	-->
+
+	<!-- Datasource for Derby DB -->
+	<bean id="dataSource" class="bitronix.tm.resource.jdbc.PoolingDataSource" init-method="init" destroy-method="close">
+		<property name="uniqueName" value="derby_jbm" />
+        <property name="maxPoolSize" value="5" />
+        <property name="minPoolSize" value="1" />
+        <property name="className" value="org.apache.derby.jdbc.EmbeddedXADataSource"/>
+        <property name="allowLocalTransactions" value="true" />
+        <property name="driverProperties">
+            <props>
+ 				<prop key="databaseName">derbydb</prop>
+				<prop key="createDatabase">create</prop>
+            </props>
+        </property>	    
+	</bean>	
+		
 	
 	<!--  Bitronix Transaction Manager embedded configuration -->
 	<bean id="btmConfig" factory-method="getConfiguration" class="bitronix.tm.TransactionManagerServices">
@@ -70,8 +87,12 @@
 			    <!-- MySQL
 				<property name="databasePlatform" value="org.hibernate.dialect.MySQL5Dialect" /> -->
 				
-				<!-- HSQLDB -->
-				<property name="databasePlatform" value="org.hibernate.dialect.HSQLDialect" />
+				<!-- HSQLDB 
+				<property name="databasePlatform" value="org.hibernate.dialect.HSQLDialect" /> -->
+				
+				<!-- Derby DB -->
+				<property name="databasePlatform" value="org.hibernate.dialect.DerbyDialect" />
+				
 				<property name="showSql" value="true" />
 				<property name="generateDdl" value="true" />
 			</bean>

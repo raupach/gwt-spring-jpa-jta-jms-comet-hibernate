@@ -3,3 +3,5 @@
 /.project
 /target
 /temp
+/derby.log
+/derbydb
