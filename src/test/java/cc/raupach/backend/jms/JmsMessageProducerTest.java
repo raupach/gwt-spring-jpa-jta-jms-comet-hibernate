@@ -28,7 +28,7 @@ public class JmsMessageProducerTest
    @Test
    public void test() throws JMSException
    {
-      jmsMessageProducer.sendTaskChangedMessage("abcd");
+      jmsMessageProducer.sendNumberChangedMessage("abcd");
       
       
    }

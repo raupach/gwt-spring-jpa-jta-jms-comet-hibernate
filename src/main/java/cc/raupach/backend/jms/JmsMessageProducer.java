@@ -22,13 +22,12 @@ public class JmsMessageProducer
     private static final Logger logger = LoggerFactory.getLogger(JmsMessageProducer.class);
 
     @Autowired
-    private JmsTemplate template = null;
+    private JmsTemplate template;
 
     /**
      * Generate JMS message
      */
-
-    public void sendTaskChangedMessage(final String initiatorClientId) throws JMSException
+    public void sendNumberChangedMessage(final String initiatorClientId) throws JMSException
     {
         template.send(new MessageCreator()
         {

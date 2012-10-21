@@ -14,7 +14,7 @@
     	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   	</listener>
 
-	
+	<!-- GWT Backend Servlet -->
   	<servlet>
     	<servlet-name>backendServiceServlet</servlet-name>
     	<servlet-class>cc.raupach.backend.service.BackendServiceImpl</servlet-class>
@@ -24,5 +24,38 @@
     	<servlet-name>backendServiceServlet</servlet-name>
     	<url-pattern>/frontend/backend</url-pattern>
   	</servlet-mapping>
-  	
+
+  	<!-- ActiveMQ Comet Part -->
+	<servlet>
+		<servlet-name>AjaxServlet</servlet-name>
+		<servlet-class>org.apache.activemq.web.AjaxServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AjaxServlet</servlet-name>
+		<url-pattern>/amq/*</url-pattern>
+	</servlet-mapping>
+
+  	<context-param>
+        <param-name>org.apache.activemq.brokerURL</param-name>
+        <param-value>vm://localhost</param-value>
+        <description>The URL of the Message Broker to connect to</description>
+    </context-param>
+
+    <context-param>
+        <param-name>org.apache.activemq.embeddedBroker</param-name>
+        <param-value>true</param-value>
+        <description>Whether we should include an embedded broker or not</description>
+    </context-param>
+ 
+  	<filter>
+      <filter-name>session</filter-name>
+      <filter-class>org.eclipse.jetty.continuation.ContinuationFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+      <filter-name>session</filter-name>
+      <url-pattern>/amq/*</url-pattern>
+    </filter-mapping>
+         	  		
 </web-app>
