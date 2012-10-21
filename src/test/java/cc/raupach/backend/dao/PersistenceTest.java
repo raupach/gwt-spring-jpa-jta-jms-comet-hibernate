@@ -1,5 +1,8 @@
 package cc.raupach.backend.dao;
 
+import static org.junit.Assert.assertNotNull;
+
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -12,10 +15,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import cc.raupach.backend.dao.AuthorDAO;
-import cc.raupach.backend.dao.BookDAO;
-import cc.raupach.backend.entity.Author;
-import cc.raupach.backend.entity.Book;
+import cc.raupach.backend.dao.SeriesDAO;
+import cc.raupach.backend.dao.RequestDAO;
+import cc.raupach.backend.entity.Series;
+import cc.raupach.backend.entity.Request;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -28,54 +31,61 @@ public class PersistenceTest
    private static Logger log = LoggerFactory.getLogger(PersistenceTest.class);
 
    @Autowired
-   private AuthorDAO authorDAO;
+   private SeriesDAO seriesDAO;
 
    @Autowired
-   private BookDAO bookDAO;
+   private RequestDAO requestDAO;
    
    @Test
    public void testDatabaseSave()
    {
       log.info("Running testDatabaseSave");
 
-      Author author = new Author();
-      author.setFirstName("Oliver");
-      author.setLastName("Raupach");
+      Series series = new Series();
+      series.setSerialNumber(Integer.valueOf(1));
 
-      Book book = new Book();
-      book.setAuthor(author);
-      book.setTitle("jdhsjg");
-      author.getBooks().add(book);
-      bookDAO.makePersistent(book);
+      Request request = new Request();
+      request.setRequestDate(new Date());
+      request.setNumber(100);
+      series.getRequests().add(request);
+      requestDAO.makePersistent(request);
       
-      book = new Book();
-      book.setAuthor(author);
-      book.setTitle("1212112");
-      author.getBooks().add(book);
-      bookDAO.makePersistent(book);
+      request = new Request();
+      request.setRequestDate(new Date());
+      request.setNumber(101);
+      series.getRequests().add(request);
+      requestDAO.makePersistent(request);
       
-      book = new Book();
-      book.setAuthor(author);
-      book.setTitle("xxxxxxxxxxxxxxxxssss");
-      author.getBooks().add(book);
-      bookDAO.makePersistent(book);
+      request = new Request();
+      request.setRequestDate(new Date());
+      request.setNumber(102);
+      series.getRequests().add(request);
+      requestDAO.makePersistent(request);
       
-      authorDAO.makePersistent(author);
+      seriesDAO.makePersistent(series);
    }
    
    @Test
    public void testDatabaseRetrieve()
    {
-      List<Author> authors =  authorDAO.get();
+      log.info("Running testDatabaseRetrieve");
       
-      for (Author author: authors)
+      List<Series> serials =  seriesDAO.get();
+      
+      for (Series series: serials)
       {
-         for (Book book:author.getBooks())
+         for (Request request:series.getRequests())
          {
-            log.info(book.getTitle());
+            log.info(request.getRequestDate()+ " : "+request.getNumber());
          }
       }
-      
+   }
+   
+   @Test
+   public void testQuery ()
+   {
+      Series s = seriesDAO.getSeriesByNumber(Integer.valueOf(1));
+     
       
    }
 }

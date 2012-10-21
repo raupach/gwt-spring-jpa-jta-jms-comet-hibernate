@@ -5,7 +5,6 @@
 	version="2.5">
 
 
-
 	<context-param> 
     	<param-name>contextConfigLocation</param-name>
     	<param-value>WEB-INF/applicationContext.xml</param-value>
@@ -16,4 +15,14 @@
   	</listener>
 
 	
+  	<servlet>
+    	<servlet-name>backendServiceServlet</servlet-name>
+    	<servlet-class>cc.raupach.backend.service.BackendServiceImpl</servlet-class>
+  	</servlet>
+  
+  	<servlet-mapping>
+    	<servlet-name>backendServiceServlet</servlet-name>
+    	<url-pattern>/frontend/backend</url-pattern>
+  	</servlet-mapping>
+  	
 </web-app>

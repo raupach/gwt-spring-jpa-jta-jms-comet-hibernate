@@ -11,8 +11,8 @@ import javax.persistence.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cc.raupach.backend.entity.Author;
-import cc.raupach.backend.entity.Book;
+import cc.raupach.backend.entity.Series;
+import cc.raupach.backend.entity.Request;
 
 /**
  * Use this class to reset the database state for the test entities.
