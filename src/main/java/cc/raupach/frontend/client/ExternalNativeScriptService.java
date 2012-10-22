@@ -19,6 +19,12 @@ public class ExternalNativeScriptService
           $wnd.taskChangedExternal = $entry(@cc.raupach.frontend.client.ExternalNativeScriptService::numberChangedExternal(Ljava/lang/String;));
     }-*/;
     
+    
+    public static native void setup()
+    /*-{
+         $wnd.addCometListener();
+     }-*/;
+    
     /**
      * Methode wird vom native-JavaScript (cockpitPush.js) aufgerufen, wenn ueber ActiveMQ die Meldung kommt, dass ein Task veraendert wurde.
      * 

@@ -27,6 +27,7 @@ public class Frontend implements EntryPoint
    public void onModuleLoad()
    {
       ExternalNativeScriptService.exportStaticMethod();
+      ExternalNativeScriptService.setup();
       
       startButton = new Button("Start");
       startButton.addClickHandler(new ClickHandler()
