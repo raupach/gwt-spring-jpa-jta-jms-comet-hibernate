@@ -32,7 +32,14 @@ public class BackendServiceImpl extends RemoteServiceServlet implements BackendS
    {
       logger.info("----------- GWT RPC -----------> requestNewRoundTrip");
       BackendServiceFacade backendServiceFacade = getBackendServiceFacade();
-      backendServiceFacade.requestNewRoundTrip(number);
+      try
+      {
+         backendServiceFacade.requestNewRoundTrip(number);
+      }
+      catch (Exception e)
+      {
+         logger.error(e.getMessage());
+      }
    }
 
    

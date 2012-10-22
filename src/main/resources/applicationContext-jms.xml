@@ -26,7 +26,7 @@
     </amq:broker>
 
     <!--  ActiveMQ Destination  -->
-    <amq:topic id="destination" physicalName="cockpitPush" />
+    <amq:topic id="cometPush" physicalName="cometPush" />
 
     <amq:queue id="queue1" physicalName="queue1" />
      
@@ -50,7 +50,7 @@
     
     <bean id="jmsProducerTemplate" class="org.springframework.jms.core.JmsTemplate"
           p:connectionFactory-ref="jmsProducerConnectionFactory"
-          p:defaultDestination-ref="destination" />
+          p:defaultDestination-ref="cometPush" />
   
 
 	<bean id="listener" class="cc.raupach.backend.jms.Listener"/>

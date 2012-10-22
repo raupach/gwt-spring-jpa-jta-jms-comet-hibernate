@@ -26,6 +26,7 @@ public class Frontend implements EntryPoint
    @Override
    public void onModuleLoad()
    {
+      ExternalNativeScriptService.exportStaticMethod();
       
       startButton = new Button("Start");
       startButton.addClickHandler(new ClickHandler()

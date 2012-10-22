@@ -29,7 +29,7 @@ public class JmsMessageProducer
      */
     public void sendNumberChangedMessage(final String initiatorClientId) throws JMSException
     {
-        template.send(new MessageCreator()
+        template.send("cometPush",new MessageCreator()
         {
             public Message createMessage(Session session) throws JMSException
             {
