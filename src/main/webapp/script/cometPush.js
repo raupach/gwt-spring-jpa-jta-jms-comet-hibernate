@@ -1,10 +1,5 @@
-var amq = org.activemq.Amq;
-amq.init({
-	uri : 'frontend/amq',
-	logging : true,
-	timeout : 20
-});
 
+amq.uri = 'frontend/amq';
 
 var numberChangedMessageHandler = {
 	rcvMessage : function(message) {
