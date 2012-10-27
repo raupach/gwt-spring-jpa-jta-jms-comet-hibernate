@@ -14,7 +14,7 @@ var numberChangedMessageHandler = {
 	}
 };
 
-
+function addCometListener () {
 
   amq.addListener("frontendClient", "topic://cometPush", numberChangedMessageHandler.rcvMessage);
-
+}

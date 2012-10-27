@@ -15,7 +15,6 @@ import com.google.gwt.user.client.ui.RootPanel;
  */
 public class Frontend implements EntryPoint
 {
-
    private final BackendServiceAsync backendService = GWT.create(BackendService.class);
    
    private Timer timer;
@@ -27,7 +26,7 @@ public class Frontend implements EntryPoint
    public void onModuleLoad()
    {
       ExternalNativeScriptService.exportStaticMethod();
-   
+      ExternalNativeScriptService.setup();
       
       startButton = new Button("Start");
       startButton.addClickHandler(new ClickHandler()

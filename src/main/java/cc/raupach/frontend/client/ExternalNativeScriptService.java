@@ -16,7 +16,7 @@ public class ExternalNativeScriptService
      */
     public static native void exportStaticMethod()
     /*-{
-          $wnd.taskChangedExternal = $entry(@cc.raupach.frontend.client.ExternalNativeScriptService::numberChangedExternal(Ljava/lang/String;));
+          $wnd.numberChangedExternal = $entry(@cc.raupach.frontend.client.ExternalNativeScriptService::numberChangedExternal(Ljava/lang/String;));
     }-*/;
     
     
@@ -26,7 +26,7 @@ public class ExternalNativeScriptService
      }-*/;
     
     /**
-     * Methode wird vom native-JavaScript (cockpitPush.js) aufgerufen, wenn ueber ActiveMQ die Meldung kommt, dass ein Task veraendert wurde.
+     * Methode wird vom native-JavaScript (cometPush.js) aufgerufen, wenn ueber ActiveMQ eine Meldung kommt.
      * 
      * @param jsonTask
      */
