@@ -13,6 +13,8 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
 
+import com.google.gson.Gson;
+
 /**
  * 
  * @author Oliver Raupach, 28.03.2012
@@ -20,33 +22,34 @@ import org.springframework.stereotype.Component;
 @Component
 public class JmsMessageProducer
 {
-    private static final Logger logger = LoggerFactory.getLogger(JmsMessageProducer.class);
+   private static final Logger logger = LoggerFactory.getLogger(JmsMessageProducer.class);
 
-    @Autowired
-    private ApplicationContext applicationContext;
+   @Autowired
+   private ApplicationContext applicationContext;
 
-    /**
-     * Generate JMS message
-     */
-    public void sendNumberChangedMessage(final String initiatorClientId) throws JMSException
-    {
-       
-        JmsTemplate template = (JmsTemplate) applicationContext.getBean("jmsTopicTemplate");
-       
-        template.send("cometPush",new MessageCreator()
-        {
-            public Message createMessage(Session session) throws JMSException
-            {
-               
+   /**
+    * Generate JMS message
+    */
+   public void sendNumberChangedMessage(final int number) throws JMSException
+   {
 
-                TextMessage message = session.createTextMessage("Hello World...");
-                logger.info("Sending message.............");
+      JmsTemplate template = (JmsTemplate) applicationContext.getBean("jmsTopicTemplate");
 
-                return message;
-            }
-        });
-    }
+      template.send("cometPush", new MessageCreator()
+      {
+         public Message createMessage(Session session) throws JMSException
+         {
+            
+            JsonNumberDto dto = new JsonNumberDto(number);
+            Gson gson = new Gson();
+            String jsonDtoStr = gson.toJson(dto);
+            
+            TextMessage message = session.createTextMessage(jsonDtoStr);
+            logger.info("Sending message............."+jsonDtoStr);
+
+            return message;
+         }
+      });
+   }
 
 }
-
-   

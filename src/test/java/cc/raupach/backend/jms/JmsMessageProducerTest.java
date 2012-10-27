@@ -29,14 +29,10 @@ public class JmsMessageProducerTest
    {
       
       
-      jmsMessageProducer.sendNumberChangedMessage("abcd");
+      jmsMessageProducer.sendNumberChangedMessage(1234);
       
-      Thread.sleep(2000);
+      Thread.sleep(200);
    }
 
-   @Test
-   public void test2() throws InterruptedException
-   {
-      Thread.sleep(2000);
-   }
+  
 }

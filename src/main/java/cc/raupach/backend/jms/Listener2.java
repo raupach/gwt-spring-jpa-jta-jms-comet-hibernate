@@ -1,7 +1,9 @@
 package cc.raupach.backend.jms;
 
+import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
+import javax.jms.TextMessage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +19,15 @@ public class Listener2 implements MessageListener
    @Override
    public void onMessage(Message message)
    {
-      logger.info("Empfangen .................");
+      TextMessage textMessage = (TextMessage) message;
+      try
+      {
+         logger.info("Empfangen ................."+textMessage.getText());
+      }
+      catch (JMSException e)
+      {
+         e.printStackTrace();
+      }
    }
 
 }

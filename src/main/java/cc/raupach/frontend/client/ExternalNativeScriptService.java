@@ -2,6 +2,8 @@ package cc.raupach.frontend.client;
 
 import java.util.logging.Logger;
 
+import com.google.gwt.core.client.JsonUtils;
+
 /**
  * 
  * @author Oliver Raupach, 30.03.2012
@@ -30,8 +32,10 @@ public class ExternalNativeScriptService
      * 
      * @param jsonTask
      */
-    public static void numberChangedExternal(String jsonTask)
+    public static void numberChangedExternal(String jsonString)
     {
+       NumberDtoOverlay dto = JsonUtils.safeEval(jsonString);
        
+       int i=1;
     }
 }

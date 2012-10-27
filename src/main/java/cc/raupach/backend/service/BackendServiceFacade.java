@@ -53,7 +53,7 @@ public class BackendServiceFacade
        series.getRequests().add(request);
        requestDAO.makePersistent(request);
        
-       jmsMessageProducer.sendNumberChangedMessage("abcd");
+       jmsMessageProducer.sendNumberChangedMessage(newNumber);
        sender.sendTaskChangedMessage("ssdfs");
        
    }

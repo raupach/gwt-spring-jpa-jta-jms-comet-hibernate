@@ -12,7 +12,7 @@
 		<java-version>1.6</java-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 		<org.springframework-version>3.1.2.RELEASE</org.springframework-version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>
@@ -21,79 +21,85 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.21</version>
-		</dependency>	
-        <dependency>
+		</dependency>
+		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<version>2.2.9</version>
-		</dependency>		
+		</dependency>
 		<dependency>
-    		<groupId>org.apache.derby</groupId>
-    		<artifactId>derby</artifactId>
-    		<version>10.9.1.0</version>
-		</dependency>		
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<version>10.9.1.0</version>
+		</dependency>
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>
 			<version>2.2.2</version>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.6.12</version>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>4.1.7.Final</version>
 		</dependency>
-     	<dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-validator</artifactId>
-                <version>4.2.0.Final</version>
-        </dependency>		
 		<dependency>
-  			<groupId>org.codehaus.btm</groupId>
-  			<artifactId>btm</artifactId>
-  			<version>2.1.3</version>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.2.0.Final</version>
 		</dependency>
 		<dependency>
-  			<groupId>org.apache.activemq</groupId>
-  			<artifactId>activemq-core</artifactId>
-  			<version>5.5.1</version>
+			<groupId>org.codehaus.btm</groupId>
+			<artifactId>btm</artifactId>
+			<version>2.1.3</version>
 		</dependency>
 		<dependency>
-  			<groupId>org.apache.activemq</groupId>
-  			<artifactId>activemq-web</artifactId>
-  			<version>5.5.1</version>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-core</artifactId>
+			<version>5.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-web</artifactId>
+			<version>5.5.1</version>
 			<exclusions>
-        		<exclusion>
-          			<artifactId>commons-logging</artifactId>
-         		 	<groupId>commons-logging</groupId>
-        		</exclusion>
-       			<exclusion>
-          			<artifactId>org.mortbay.jetty</artifactId>
-          			<groupId>jetty-util</groupId>
-        		</exclusion>
-        		<exclusion>
-          			<artifactId>mx4j</artifactId>
-          			<groupId>mx4j</groupId>
-        		</exclusion>
-      		</exclusions>  			
-		</dependency>	
-			<dependency>
-  			<groupId>org.apache.xbean</groupId>
-  			<artifactId>xbean-spring</artifactId>
-  			<version>3.9</version>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>org.mortbay.jetty</artifactId>
+					<groupId>jetty-util</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>mx4j</artifactId>
+					<groupId>mx4j</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.apache.xbean</groupId>
+			<artifactId>xbean-spring</artifactId>
+			<version>3.9</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+
 		<!-- JSTL dependencies -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		
+
 		<!-- Spring -->
 
 		<dependency>
@@ -135,19 +141,19 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jms</artifactId>
 			<version>${org.springframework-version}</version>
-		</dependency>	
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>${org.springframework-version}</version>
-		</dependency>			
+		</dependency>
 		<!-- @Inject -->
 		<dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
-		
+
 		<!-- Specific to application logic (JSON, services, utilities) -->
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -205,7 +211,7 @@
 			<version>2.4.0</version>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
@@ -228,13 +234,13 @@
 				<artifactId>gwt-maven-plugin</artifactId>
 				<version>2.4.0</version>
 				<configuration>
-				    <style>PRETTY</style> 
-				    <localWorkers>3</localWorkers>
+					<style>PRETTY</style>
+					<localWorkers>3</localWorkers>
 				</configuration>
 				<executions>
 					<execution>
 						<configuration>
-						    <compileReport>true</compileReport>
+							<compileReport>true</compileReport>
 							<extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
 						</configuration>
 						<goals>
@@ -242,7 +248,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>		
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -251,22 +257,6 @@
 					<source>${java-version}</source>
 					<target>${java-version}</target>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>hibernate3-maven-plugin</artifactId>
-				<version>3.0</version>
-				
-				<configuration>
-        <hibernatetool>
-            <jpaconfiguration persistenceunit="exampleHibernateJPA" />
-
-            <hbm2ddl export="false" create="true"
-                update="true" format="true" outputfilename="schemaDiff.ddl" />
-
-        </hibernatetool>
-    </configuration>
-
 			</plugin>
 		</plugins>
 	</build>
