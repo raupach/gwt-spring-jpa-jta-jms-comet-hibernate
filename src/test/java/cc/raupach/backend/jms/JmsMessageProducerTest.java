@@ -1,5 +1,6 @@
 package cc.raupach.backend.jms;
 
+
 import javax.jms.JMSException;
 
 import org.junit.Test;
@@ -9,8 +10,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-
-import cc.raupach.backend.jms.JmsMessageProducer;
 
 /**
  * @author Oliver Raupach, 18.10.2012
@@ -26,11 +25,18 @@ public class JmsMessageProducerTest
    private JmsMessageProducer jmsMessageProducer;
    
    @Test
-   public void test() throws JMSException
+   public void test() throws JMSException, InterruptedException
    {
+      
+      
       jmsMessageProducer.sendNumberChangedMessage("abcd");
       
-      
+      Thread.sleep(2000);
    }
 
+   @Test
+   public void test2() throws InterruptedException
+   {
+      Thread.sleep(2000);
+   }
 }

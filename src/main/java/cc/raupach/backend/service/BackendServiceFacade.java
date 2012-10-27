@@ -13,6 +13,7 @@ import cc.raupach.backend.dao.SeriesDAO;
 import cc.raupach.backend.entity.Request;
 import cc.raupach.backend.entity.Series;
 import cc.raupach.backend.jms.JmsMessageProducer;
+import cc.raupach.backend.jms.Sender;
 
 /**
  * @author Oliver Raupach, 21.10.2012
@@ -30,6 +31,9 @@ public class BackendServiceFacade
    
    @Autowired
    private JmsMessageProducer jmsMessageProducer;
+   
+   @Autowired
+   private Sender sender;
    
    public void requestNewRoundTrip(Integer number) throws JMSException
    {
@@ -50,6 +54,8 @@ public class BackendServiceFacade
        requestDAO.makePersistent(request);
        
        jmsMessageProducer.sendNumberChangedMessage("abcd");
+       sender.sendTaskChangedMessage("ssdfs");
+       
    }
 
 }

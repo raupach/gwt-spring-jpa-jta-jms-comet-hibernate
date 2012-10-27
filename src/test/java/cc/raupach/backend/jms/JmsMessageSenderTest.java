@@ -34,6 +34,8 @@ public class JmsMessageSenderTest
       sender.sendTaskChangedMessage("abcd");
       
       logger.info("-----------> Abgeschickt.");
+     
    }
 
+  
 }

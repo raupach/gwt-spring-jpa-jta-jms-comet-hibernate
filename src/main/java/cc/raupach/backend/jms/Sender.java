@@ -21,8 +21,8 @@ public class Sender
 
    private static final Logger logger = LoggerFactory.getLogger(Sender.class);
    
-   @Autowired
-   private JmsTemplate template ;
+//   @Autowired
+//   private JmsTemplate template ;
 
    /**
     * Generate JMS message
@@ -30,17 +30,17 @@ public class Sender
 
    public void sendTaskChangedMessage(final String initiatorClientId) throws JMSException
    {
-       template.send("queue1", new MessageCreator()
-       {
-           public Message createMessage(Session session) throws JMSException
-           {
-              
-
-               TextMessage message = session.createTextMessage("Hello World...");
-               logger.info("Sending message.............");
-
-               return message;
-           }
-       });
+//       template.send("queue1", new MessageCreator()
+//       {
+//           public Message createMessage(Session session) throws JMSException
+//           {
+//              
+//
+//               TextMessage message = session.createTextMessage("Hello World...");
+//               logger.info("Sending message.............");
+//
+//               return message;
+//           }
+//       });
    }
 }
