@@ -21,7 +21,7 @@
     <!--  Embedded ActiveMQ Broker -->
     <amq:broker id="broker" useJmx="false" persistent="false">
         <amq:transportConnectors>
-            <amq:transportConnector uri="tcp://localhost:61616" />
+            <amq:transportConnector uri="tcp://localhost:61616?daemon=true" />
         </amq:transportConnectors>
     </amq:broker>
 
@@ -44,7 +44,7 @@
         <property name="testConnections" value="true" />
         <property name="driverProperties">
             <props>
-                <prop key="brokerURL">tcp://localhost:61616</prop>
+                <prop key="brokerURL">tcp://localhost:61616?daemon=true</prop>
             </props>
         </property>
     </bean>
@@ -59,7 +59,7 @@
    		<property name="pubSubDomain" value="true"/>
 	</bean>
   
- 	<amq:connectionFactory id="jmsFactory2" brokerURL="tcp://localhost:61616" />
+ 	<amq:connectionFactory id="jmsFactory2" brokerURL="tcp://localhost:61616?daemon=true" />
 
     <!-- JMS Producer Configuration -->
     <bean id="connectionFactory" 
