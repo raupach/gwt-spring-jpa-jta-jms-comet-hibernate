@@ -2,6 +2,7 @@ package cc.raupach.frontend.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Timer;
@@ -22,6 +23,8 @@ public class Frontend implements EntryPoint
    private Button startButton;
    private Integer currentSeries = Integer.valueOf(0);
 
+   private static Label counterField;
+
    @Override
    public void onModuleLoad()
    {
@@ -39,7 +42,7 @@ public class Frontend implements EntryPoint
             {
                Double random = new Double ( Math.random() *500000);
                currentSeries = random.intValue();
-               timer.scheduleRepeating(3000);
+               timer.scheduleRepeating(1000);
                startButton.setText("Stop");
                running = true;
             }
@@ -53,7 +56,7 @@ public class Frontend implements EntryPoint
       });
       
       
-      Label counterField = new Label();
+      counterField = new Label();
       counterField.setText("0");
       
       
@@ -81,6 +84,19 @@ public class Frontend implements EntryPoint
             });
          }
       };
+   }
+   
+   
+   /**
+    * Methode wird vom native-JavaScript (cometPush.js) aufgerufen, wenn ueber ActiveMQ eine Meldung kommt.
+    * 
+    * @param jsonString
+    */
+   public static void numberChangedExternal(String jsonString)
+   {
+      NumberDtoOverlay dto = JsonUtils.safeEval(jsonString);
+      
+      counterField.setText(Integer.valueOf(dto.getNumber()).toString());
    }
 
 }

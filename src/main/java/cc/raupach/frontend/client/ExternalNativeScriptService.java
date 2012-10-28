@@ -2,8 +2,6 @@ package cc.raupach.frontend.client;
 
 import java.util.logging.Logger;
 
-import com.google.gwt.core.client.JsonUtils;
-
 /**
  * 
  * @author Oliver Raupach, 30.03.2012
@@ -18,7 +16,7 @@ public class ExternalNativeScriptService
      */
     public static native void exportStaticMethod()
     /*-{
-          $wnd.numberChangedExternal = $entry(@cc.raupach.frontend.client.ExternalNativeScriptService::numberChangedExternal(Ljava/lang/String;));
+          $wnd.numberChangedExternal = $entry(@cc.raupach.frontend.client.Frontend::numberChangedExternal(Ljava/lang/String;));
     }-*/;
     
     
@@ -27,15 +25,5 @@ public class ExternalNativeScriptService
          $wnd.addCometListener();
      }-*/;
     
-    /**
-     * Methode wird vom native-JavaScript (cometPush.js) aufgerufen, wenn ueber ActiveMQ eine Meldung kommt.
-     * 
-     * @param jsonTask
-     */
-    public static void numberChangedExternal(String jsonString)
-    {
-       NumberDtoOverlay dto = JsonUtils.safeEval(jsonString);
-       
-       int i=1;
-    }
+ 
 }
