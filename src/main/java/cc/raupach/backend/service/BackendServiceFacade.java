@@ -12,8 +12,8 @@ import cc.raupach.backend.dao.RequestDAO;
 import cc.raupach.backend.dao.SeriesDAO;
 import cc.raupach.backend.entity.Request;
 import cc.raupach.backend.entity.Series;
-import cc.raupach.backend.jms.JmsMessageProducer;
-import cc.raupach.backend.jms.Sender;
+import cc.raupach.backend.jms.FrontendNotifier;
+import cc.raupach.backend.jms.LogQueueSender;
 
 /**
  * @author Oliver Raupach, 21.10.2012
@@ -30,10 +30,11 @@ public class BackendServiceFacade
    private RequestDAO requestDAO;
    
    @Autowired
-   private JmsMessageProducer jmsMessageProducer;
+   private FrontendNotifier frontendNotifier;
+   
    
    @Autowired
-   private Sender sender;
+   private LogQueueSender logQueueSender;
    
    public void requestNewRoundTrip(Integer number) throws JMSException
    {
@@ -53,8 +54,8 @@ public class BackendServiceFacade
        series.getRequests().add(request);
        requestDAO.makePersistent(request);
        
-       jmsMessageProducer.sendNumberChangedMessage(newNumber);
-       sender.sendTaskChangedMessage("ssdfs");
+       frontendNotifier.sendNumberChangedMessage(newNumber);
+       logQueueSender.sendLogMessage("New Number generated: "+newNumber);
        
    }
 

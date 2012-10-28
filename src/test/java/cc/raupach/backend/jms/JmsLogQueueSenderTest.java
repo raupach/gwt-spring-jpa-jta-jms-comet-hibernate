@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import cc.raupach.backend.jms.Sender;
+import cc.raupach.backend.jms.LogQueueSender;
 
 /**
  * @author Oliver Raupach, 18.10.2012
@@ -21,21 +21,29 @@ import cc.raupach.backend.jms.Sender;
 @ContextConfiguration(locations = { "classpath:applicationContext-core.xml" })
 @Transactional
 @TransactionConfiguration(defaultRollback = false)
-public class JmsMessageSenderTest
+public class JmsLogQueueSenderTest
 {
-   private static final Logger logger = LoggerFactory.getLogger(JmsMessageSenderTest.class);
-   
+   private static final Logger logger = LoggerFactory.getLogger(JmsLogQueueSenderTest.class);
+
    @Autowired
-   private Sender sender;
-   
+   private LogQueueSender logQueueSender;
+
    @Test
-   public void test() throws JMSException
+   public void testLogQueueSender() throws JMSException
    {
-      sender.sendTaskChangedMessage("abcd");
-      
-      logger.info("-----------> Abgeschickt.");
-     
+
+      for (int i = 0; i < 10; i++)
+      {
+         logQueueSender.sendLogMessage("LogMessage: " + i);
+
+         logger.info("-----------> SendMessage " + i);
+      }
    }
 
-  
+   @Test
+   public void justWaitForQueueProcessing () throws InterruptedException
+   {
+      Thread.sleep(500);
+   }
+   
 }

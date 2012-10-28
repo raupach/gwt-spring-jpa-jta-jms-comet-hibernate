@@ -19,7 +19,7 @@
     <context:component-scan base-package="cc.raupach" />
     
     <!--  Embedded ActiveMQ Broker -->
-    <amq:broker id="broker" useJmx="false" persistent="false">
+    <amq:broker id="broker" useJmx="true" persistent="false">
         <amq:transportConnectors>
             <amq:transportConnector uri="tcp://localhost:0" />
         </amq:transportConnectors>
@@ -28,7 +28,7 @@
     <!--  ActiveMQ Destination  -->
     <amq:topic id="cometPush" physicalName="cometPush" />
 
-    <amq:queue id="queue1" physicalName="queue1" />
+    <amq:queue id="logQueue" physicalName="logQueue" />
      
 
     <!-- JMS Producer Configuration -->
@@ -40,7 +40,7 @@
     <bean id="jmsFactory" class="bitronix.tm.resource.jms.PoolingConnectionFactory" init-method="init" destroy-method="close">
         <property name="className" value="org.apache.activemq.ActiveMQXAConnectionFactory" />
         <property name="uniqueName" value="activemq" />
-        <property name="maxPoolSize" value="10" />
+        <property name="maxPoolSize" value="15" />
         <property name="testConnections" value="true" />
         <property name="driverProperties">
             <props>
@@ -48,43 +48,27 @@
             </props>
         </property>
     </bean>
-    
-    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate"
+ 
+   <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate"
           p:connectionFactory-ref="jmsProducerConnectionFactory"
           p:defaultDestination-ref="cometPush" />
 
-	<bean id="jmsTopicTemplate" class="org.springframework.jms.core.JmsTemplate" >
-	<qualifier value="jmsTopicTemplate" />
-   		<constructor-arg ref="connectionFactory" />
-   		<property name="pubSubDomain" value="true"/>
-	</bean>
-  
- 	<amq:connectionFactory id="jmsFactory2" brokerURL="vm://localhost" />
 
     <!-- JMS Producer Configuration -->
     <bean id="connectionFactory" 
           class="org.springframework.jms.connection.SingleConnectionFactory"
           depends-on="broker"
-          p:targetConnectionFactory-ref="jmsFactory2" />
+          p:targetConnectionFactory-ref="jmsFactory" />
           
-	<bean id="listener" class="cc.raupach.backend.jms.Listener"/>
 
 	<bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
     	<property name="connectionFactory" ref="jmsProducerConnectionFactory"/>
-   		<property name="destination" ref="queue1"/>
-    	<property name="messageListener" ref="listener" />
+   		<property name="destination" ref="logQueue"/>
+    	<property name="messageListener" ref="LogQueueListener" />
     	<property name="sessionTransacted" value="true"/>
     	<property name="transactionManager" ref="transactionManager"/>
+    	<property name="maxConcurrentConsumers" value="5"/>
 	</bean>
     
-    <bean id="listener2" class="cc.raupach.backend.jms.Listener2"/>
-    
-	<bean id="jmsContainer2" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-    	<property name="connectionFactory" ref="connectionFactory"/>
-   		<property name="destination" ref="cometPush"/>
-    	<property name="messageListener" ref="listener2" />
-    	<property name="sessionTransacted" value="true"/>
-    	<property name="transactionManager" ref="transactionManager"/>
-	</bean>
 	
 </beans>

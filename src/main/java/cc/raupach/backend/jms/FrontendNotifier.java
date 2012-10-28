@@ -8,7 +8,6 @@ import javax.jms.TextMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
@@ -20,12 +19,12 @@ import com.google.gson.Gson;
  * @author Oliver Raupach, 28.03.2012
  */
 @Component
-public class JmsMessageProducer
+public class FrontendNotifier
 {
-   private static final Logger logger = LoggerFactory.getLogger(JmsMessageProducer.class);
+   private static final Logger logger = LoggerFactory.getLogger(FrontendNotifier.class);
 
    @Autowired
-   private ApplicationContext applicationContext;
+   private JmsTemplate jmsTemplate;
 
    /**
     * Generate JMS message
@@ -33,9 +32,7 @@ public class JmsMessageProducer
    public void sendNumberChangedMessage(final int number) throws JMSException
    {
 
-      JmsTemplate template = (JmsTemplate) applicationContext.getBean("jmsTopicTemplate");
-
-      template.send("cometPush", new MessageCreator()
+      jmsTemplate.send("cometPush", new MessageCreator()
       {
          public Message createMessage(Session session) throws JMSException
          {

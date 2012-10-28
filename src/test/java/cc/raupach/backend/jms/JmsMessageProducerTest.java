@@ -1,6 +1,5 @@
 package cc.raupach.backend.jms;
 
-
 import javax.jms.JMSException;
 
 import org.junit.Test;
@@ -22,17 +21,18 @@ public class JmsMessageProducerTest
 {
 
    @Autowired
-   private JmsMessageProducer jmsMessageProducer;
-   
+   private FrontendNotifier jmsMessageProducer;
+
    @Test
    public void test() throws JMSException, InterruptedException
    {
-      
-      
       jmsMessageProducer.sendNumberChangedMessage(1234);
-      
-      Thread.sleep(200);
    }
 
-  
+   @Test
+   public void justWaitForQueueProcessing() throws InterruptedException
+   {
+      Thread.sleep(500);
+   }
+
 }

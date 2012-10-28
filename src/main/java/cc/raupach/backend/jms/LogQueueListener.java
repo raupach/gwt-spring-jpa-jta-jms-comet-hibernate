@@ -7,26 +7,29 @@ import javax.jms.TextMessage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Oliver Raupach, 20.10.2012
  */
-public class Listener2 implements MessageListener
+@Component (value="LogQueueListener")
+public class LogQueueListener implements MessageListener
 {
 
-   private static final Logger logger = LoggerFactory.getLogger(Listener2.class);
-   
+   private static final Logger logger = LoggerFactory.getLogger(LogQueueListener.class);
+
    @Override
    public void onMessage(Message message)
    {
-      TextMessage textMessage = (TextMessage) message;
       try
       {
-         logger.info("Empfangen ................."+textMessage.getText());
+         TextMessage tm = (TextMessage) message;
+
+         logger.info("Receive LogMessage ................." + tm.getText());
       }
       catch (JMSException e)
       {
-         e.printStackTrace();
+         logger.error(e.getMessage(), e);
       }
    }
 
