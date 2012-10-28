@@ -21,7 +21,7 @@
     <!--  Embedded ActiveMQ Broker -->
     <amq:broker id="broker" useJmx="true" persistent="false">
         <amq:transportConnectors>
-            <amq:transportConnector uri="tcp://localhost:0" />
+            <amq:transportConnector uri="tcp://localhost:61616?daemon=true" />
         </amq:transportConnectors>
     </amq:broker>
 
@@ -44,7 +44,7 @@
         <property name="testConnections" value="true" />
         <property name="driverProperties">
             <props>
-                <prop key="brokerURL">vm://localhost</prop>
+                <prop key="brokerURL">tcp://localhost:61616?daemon=true</prop>
             </props>
         </property>
     </bean>
