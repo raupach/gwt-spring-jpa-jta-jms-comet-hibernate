@@ -4,10 +4,12 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.Session;
 import javax.jms.TextMessage;
+import javax.jms.Topic;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
@@ -26,13 +28,18 @@ public class FrontendNotifier
    @Autowired
    private JmsTemplate jmsTemplate;
 
+   @Autowired
+   @Qualifier("cometPush")
+   private Topic topic;
+   
+   
    /**
     * Generate JMS message
     */
    public void sendNumberChangedMessage(final int number) throws JMSException
    {
 
-      jmsTemplate.send("cometPush", new MessageCreator()
+      jmsTemplate.send(topic, new MessageCreator()
       {
          public Message createMessage(Session session) throws JMSException
          {
