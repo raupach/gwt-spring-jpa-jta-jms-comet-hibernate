@@ -38,7 +38,7 @@
 
   	<context-param>
         <param-name>org.apache.activemq.brokerURL</param-name>
-        <param-value>tcp://localhost:61616?daemon=true</param-value>
+        <param-value>vm://localhost</param-value>
         <description>The URL of the Message Broker to connect to</description>
     </context-param>
 

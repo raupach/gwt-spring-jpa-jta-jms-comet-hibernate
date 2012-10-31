@@ -1,10 +1,12 @@
 package cc.raupach.backend.dao;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.Date;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -24,9 +26,11 @@ import cc.raupach.backend.entity.Request;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:applicationContext-core.xml" })
 @Transactional
-@TransactionConfiguration(defaultRollback = false)
+@TransactionConfiguration(defaultRollback = true)
 public class PersistenceTest
 {
+
+   private static final int TEST_NUMBER = 999999;
 
    private static Logger log = LoggerFactory.getLogger(PersistenceTest.class);
 
@@ -35,6 +39,17 @@ public class PersistenceTest
 
    @Autowired
    private RequestDAO requestDAO;
+
+   private Series testSeries;
+   
+   @Before
+   public void setup()
+   {
+      testSeries = new Series();
+      testSeries.setSerialNumber(Integer.valueOf(TEST_NUMBER));
+      seriesDAO.makePersistent(testSeries);
+   }
+   
    
    @Test
    public void testDatabaseSave()
@@ -84,8 +99,9 @@ public class PersistenceTest
    @Test
    public void testQuery ()
    {
-      Series s = seriesDAO.getSeriesByNumber(Integer.valueOf(1));
-     
+      Series s = seriesDAO.getSeriesByNumber(Integer.valueOf(TEST_NUMBER));
+      assertNotNull (s);
+      assertEquals(testSeries.getId(), s.getId());
       
    }
 }
