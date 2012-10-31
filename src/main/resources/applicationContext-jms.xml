@@ -19,9 +19,9 @@
     <context:component-scan base-package="cc.raupach" />
     
     <!--  Embedded ActiveMQ Broker -->
-    <amq:broker id="broker" useJmx="true" persistent="false">
+    <amq:broker id="broker" useJmx="true" persistent="false" start="true">
         <amq:transportConnectors>
-            <amq:transportConnector uri="vm://localhost" />
+            <amq:transportConnector uri="tcp://localhost:61616" />
         </amq:transportConnectors>
         
         <amq:destinations>
@@ -35,33 +35,27 @@
     <amq:queue id="logQueue" physicalName="logQueue" />
      
 
-    <bean id="jmsFactory" class="bitronix.tm.resource.jms.PoolingConnectionFactory" init-method="init" destroy-method="close">
+    <bean id="jmsFactory" class="bitronix.tm.resource.jms.PoolingConnectionFactory" init-method="init" destroy-method="close" depends-on="broker">
         <property name="className" value="org.apache.activemq.ActiveMQXAConnectionFactory" />
         <property name="uniqueName" value="activemq" />
         <property name="maxPoolSize" value="15" />
         <property name="testConnections" value="true" />
         <property name="driverProperties">
             <props>
-                <prop key="brokerURL">vm://localhost</prop>
+                <prop key="brokerURL">tcp://localhost:61616</prop>
             </props>
         </property>
     </bean>
 
- 
-    <bean id="connectionFactory" 
-          class="org.springframework.jms.connection.SingleConnectionFactory"
-          depends-on="broker"
-          p:targetConnectionFactory-ref="jmsFactory" />
-
           
    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate"
-          p:connectionFactory-ref="connectionFactory"
+          p:connectionFactory-ref="jmsFactory"
           p:defaultDestination-ref="cometPush" >
 	</bean>
 
 
 	<bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-    	<property name="connectionFactory" ref="connectionFactory"/>
+    	<property name="connectionFactory" ref="jmsFactory"/>
    		<property name="destination" ref="logQueue"/>
     	<property name="messageListener" ref="LogQueueListener" />
     	<property name="sessionTransacted" value="true"/>

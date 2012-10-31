@@ -70,7 +70,7 @@
     	<property name="logPart1Filename" value="temp/btm1.tlog" />
  		<property name="logPart2Filename" value="temp/btm2.tlog" />
  		<property name="warnAboutZeroResourceTransaction" value="false" />
- 		<property name="gracefulShutdownInterval" value="0" />
+ 		<property name="gracefulShutdownInterval" value="2" />
 	</bean>
  
 	<!-- create BTM transaction manager -->
