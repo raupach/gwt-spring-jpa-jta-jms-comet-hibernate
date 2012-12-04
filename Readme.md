@@ -12,6 +12,8 @@ This project demonstrates a variety of useful functions right out of the box, an
 * JPA annotations
 * Derby
 * GWT
+* GWT JavaScriptObject Overlay
+* GWT JavaScript Native Interface (JSNI) 
 * JMS / ActiveMQ
 * Comet
 * Spring
