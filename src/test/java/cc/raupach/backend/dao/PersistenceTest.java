@@ -5,6 +5,11 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
+import javax.persistence.metamodel.Attribute;
+import javax.persistence.metamodel.EntityType;
+import javax.persistence.metamodel.Metamodel;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,6 +53,26 @@ public class PersistenceTest
       testSeries = new Series();
       testSeries.setSerialNumber(Integer.valueOf(TEST_NUMBER));
       seriesDAO.makePersistent(testSeries);
+   }
+   
+   @Test
+   public void testMetamodel()
+   {
+	   Metamodel m = requestDAO.getMeta();
+	   Set<EntityType<?>> ent = m.getEntities();
+	   
+	   for (EntityType e:ent)
+	   {
+		   log.info( e.getName());
+		   
+		   for (Object a:e.getAttributes())
+		   {
+			   int x=1;
+		   }
+		   
+	   }
+	   
+	  
    }
    
    

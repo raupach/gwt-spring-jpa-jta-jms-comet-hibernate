@@ -3,6 +3,8 @@ package cc.raupach.backend.util;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.metamodel.Metamodel;
+
 public interface GenericJpaDAO<T, ID extends Serializable>
 {
 
@@ -13,4 +15,6 @@ public interface GenericJpaDAO<T, ID extends Serializable>
    public abstract void makePersistent(T entity);
 
    public abstract void makeTransient(T entity);
+   
+   public Metamodel getMeta();
 }

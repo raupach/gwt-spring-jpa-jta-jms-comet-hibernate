@@ -39,13 +39,11 @@
   	<context-param>
         <param-name>org.apache.activemq.brokerURL</param-name>
         <param-value>tcp://localhost:61616</param-value>
-        <description>The URL of the Message Broker to connect to</description>
     </context-param>
 
     <context-param>
         <param-name>org.apache.activemq.embeddedBroker</param-name>
         <param-value>false</param-value>
-        <description>Whether we should include an embedded broker or not</description>
     </context-param>
  
   	<filter>

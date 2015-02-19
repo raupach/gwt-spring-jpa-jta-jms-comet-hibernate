@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.metamodel.Metamodel;
 
 import org.springframework.util.Assert;
 
@@ -66,4 +67,10 @@ public abstract class GenericJpaDAOImpl<T, ID extends Serializable> implements G
       entityManager.remove(entity);
    }
 
+   
+   public Metamodel getMeta()
+   {
+	   return entityManager.getMetamodel();
+   }
+   
 }
